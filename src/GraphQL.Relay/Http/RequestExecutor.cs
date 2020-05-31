@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GraphQL.Http;
+using GraphQL.SystemTextJson;
 
 namespace GraphQL.Relay.Http
 {

@@ -1,14 +1,10 @@
-﻿using GraphQL;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using HttpMultipartParser;
-using Newtonsoft.Json;
 using System.IO;
-using GraphQL.Relay.Utilities;
+using System.Text.Json;
+using GraphQL.SystemTextJson;
 
 namespace GraphQL.Relay.Http
 {
@@ -39,13 +35,13 @@ namespace GraphQL.Relay.Http
         {
             if (stringContent[0] == '[')
                 return new RelayRequest(
-                    JsonConvert.DeserializeObject<RelayQuery[]>(stringContent),
+                    JsonSerializer.Deserialize<RelayQuery[]>(stringContent),
                     isBatched: true
                 );
 
             if (stringContent[0] == '{')
                 return new RelayRequest() {
-                    JsonConvert.DeserializeObject<RelayQuery>(stringContent)
+                    JsonSerializer.Deserialize<RelayQuery>(stringContent)
                 };
 
             throw new Exception("Unrecognized request json. GraphQL queries requests should be a single object, or an array of objects");

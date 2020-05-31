@@ -1,4 +1,5 @@
-﻿using GraphQL.Types;
+﻿using System.Threading.Tasks;
+using GraphQL.Types;
 
 namespace GraphQL.Relay.Types
 {
@@ -8,20 +9,20 @@ namespace GraphQL.Relay.Types
         {
             Name = "Query";
 
-            Field<NodeInterface>()
+            Field<RelayNodeInterface>()
                 .Name("node")
                 .Description("Fetches an object given its global Id")
-                .Argument<NonNullGraphType<IdGraphType>>("id", "The global Id of the object")
-                .Resolve(ResolveObjectFromGlobalId);
+                .Argument<IdGraphType>("id", "The global Id of the object")
+                .ResolveAsync(ResolveObjectFromGlobalId);
         }
 
-        private object ResolveObjectFromGlobalId(ResolveFieldContext<object> context)
+        private Task<object> ResolveObjectFromGlobalId(IResolveFieldContext<object> context)
         {
             var globalId = context.GetArgument<string>("id");
-            var parts = Node.FromGlobalId(globalId);
+            var parts = RelayNode.FromGlobalId(globalId);
             var node = (IRelayNode<object>) context.Schema.FindType(parts.Type);
 
-            return node.GetById(parts.Id);
+            return node.GetById(parts.Id, context);
         }
     }
 }

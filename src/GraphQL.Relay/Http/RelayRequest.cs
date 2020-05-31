@@ -1,7 +1,7 @@
 ﻿using GraphQL.Relay.Utilities;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace GraphQL.Relay.Http
 {
