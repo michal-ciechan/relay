@@ -11,11 +11,11 @@ namespace GraphQL.Relay.Types
 
         public GlobalId FromGlobalId(string globalId)
         {
-            var parts = globalId.Split(':');
+            var parts = globalId.Split('/');
             
             return new GlobalId {
                 Type = parts[0],
-                Id = string.Join("/", parts.Skip(count: 1)),
+                Id = parts[1],
             };
         }
     }

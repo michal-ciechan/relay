@@ -49,9 +49,9 @@ namespace GraphQL.Relay.Http
 
         private static RelayRequest DeserializeFormData(Stream body)
         {
-            var form = new MultipartFormDataParser(body);
+            var form = MultipartFormDataParser.Parse(body);
 
-            var req = new RelayRequest()
+            var req = new RelayRequest
             {
                 Files = form.Files.Select(f => new HttpFile {
                     ContentDisposition = f.ContentDisposition,

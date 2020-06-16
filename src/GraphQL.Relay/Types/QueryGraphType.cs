@@ -1,4 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using GraphQL.Types;
 
 namespace GraphQL.Relay.Types
@@ -20,9 +24,13 @@ namespace GraphQL.Relay.Types
         {
             var globalId = context.GetArgument<string>("id");
             var parts = RelayNode.FromGlobalId(globalId);
-            var node = (IRelayNode<object>) context.Schema.FindType(parts.Type);
+            
+            var type = parts.Type;
+            var id = parts.Id;
+            
+            var node = (IRelayNode)context.Schema.FindType(type);
 
-            return node.GetById(parts.Id, context);
+            return node.GetById(id, context);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace GraphQL.Relay.Types
         }
 
         public static IGlobalIdSerializer GlobalIdSerializer { get; set; } = new Base64EncodedGlobalIdSerializer();
+        public static ICursorSerializer CursorSerializer { get; set; } = new TextCursorSerializer();
 
         public static string ToGlobalId(string name, object id)
         {

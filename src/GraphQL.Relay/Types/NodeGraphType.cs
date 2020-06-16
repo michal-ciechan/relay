@@ -74,6 +74,8 @@ namespace GraphQL.Relay.Types
 
             return field;
         }
+
+        async Task<object> IRelayNode.GetById(string id, IResolveFieldContext<object> context) => await GetById(id, context);
     }
 
     public abstract class NodeGraphType<TSource> : NodeGraphType<TSource, TSource>
