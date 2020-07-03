@@ -12,7 +12,7 @@ namespace GraphQL.Relay.Types
             _getById = getById;
         }
 
-        public override Task<TOut> GetById(string id, IResolveFieldContext<object> context)
+        public override Task<TOut> GetByRelayGlobalId(string id, IResolveFieldContext<object> context)
         {
             return _getById(id, context);
         }

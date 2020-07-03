@@ -18,7 +18,7 @@ namespace GraphQL.Relay.Types
             Interface<RelayNodeInterface>();
         }
 
-        public abstract Task<TOut> GetById(string id, IResolveFieldContext<object> context);
+        public abstract Task<TOut> GetByRelayGlobalId(string id, IResolveFieldContext<object> context);
 
         public FieldType Id<TReturnType>(Expression<Func<T, TReturnType>> expression)
         {
@@ -75,7 +75,7 @@ namespace GraphQL.Relay.Types
             return field;
         }
 
-        async Task<object> IRelayNode.GetById(string id, IResolveFieldContext<object> context) => await GetById(id, context);
+        async Task<object> IRelayNode.GetById(string id, IResolveFieldContext<object> context) => await GetByRelayGlobalId(id, context);
     }
 
     public abstract class NodeGraphType<TSource> : NodeGraphType<TSource, TSource>

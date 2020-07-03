@@ -9,6 +9,6 @@ namespace GraphQL.Relay.Types
     
     public interface IRelayNode<T> : IRelayNode
     {
-        new Task<T> GetById(string id, IResolveFieldContext<object> context);
+        new Task<T> GetByRelayGlobalId(string id, IResolveFieldContext<object> context);
     }
 }
